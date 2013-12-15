@@ -24,11 +24,11 @@ public class BodyCanvas extends JPanel {
     	graphics.fillRect(0,0,windowsize,windowsize);
         for(int i = 0; i < bodys.size(); i++) {
         	double loc[] = world2screen(bodys.get(i).getLoc());
-        	ArrayList<double[]> hist = bodys.get(i).getHistory();
+//        	ArrayList<double[]> hist = bodys.get(i).getHistory();
         	graphics.setColor(Color.white);
-        	boolean set = false;
-        	double[] prev = {0.0, 0.0};
-        	
+//        	boolean set = false;
+//        	double[] prev = {0.0, 0.0};
+//        	
 //        	for(double[] h : hist) {
 //        		double[] h1 = world2screen(h);
 //        		if(set) {
