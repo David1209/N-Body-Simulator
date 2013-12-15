@@ -5,20 +5,22 @@ import java.util.ArrayList;
 
 public class Body {
 	int size;
-	double vx, vy, x, y, z, mass;
+	double vx, vy, x, y, mass;
 	Color c;
 	ArrayList<double[]> hist = new ArrayList<double[]>();
 	
 	public Body() {
-		this(20, 1.0);
+		this(20, 0.0, 0.0, 0.0, 0.0, 2000.0);
 	}
 	
-	public Body(int size, double speed) {
+	public Body(int size, double x, double y, double vx, double vy, double mass) {
 		this.size = size;
 		c = Color.red;
-		x = 0;
-		y = 0;
-		z = 0;
+		this.x = x;
+		this.y = y;
+		this.vx = vx;
+		this.vy = vy;
+		this.mass = mass;
 	}
 	
 	public ArrayList<double[]> getHistory() {
@@ -38,7 +40,7 @@ public class Body {
 	}
 	
 	public double[] getLoc() {
-		double[] loc = {x, y, z};
+		double[] loc = {x, y};
 //		System.out.println("Getting location: " + x);
 		return loc;
 	}
@@ -46,7 +48,6 @@ public class Body {
 	public void setLoc(double[] loc) {
 		x = loc[0];
 		y = loc[1];
-		z = loc[2];
 		double[] a = {x, y};
 		hist.add(a);
 //		System.out.println("Updating location to: " + x);
@@ -54,7 +55,7 @@ public class Body {
 	
 	public double getDistance(Body b) {
 		double[] locb = b.getLoc();
-		return Math.sqrt(Math.pow(Math.abs(locb[0] - x), 2) + Math.pow(Math.abs(locb[1] - y), 2) +  Math.pow(Math.abs(locb[2] - z), 2));
+		return Math.sqrt(Math.pow(Math.abs(locb[0] - x), 2) + Math.pow(Math.abs(locb[1] - y), 2));
 	}
 	
 	public void setSpeed(double[] s) {

@@ -1,28 +1,21 @@
 package nBodySimulator;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
 public class nBodySimulator {
 	public static void main(String[] args) throws InterruptedException {
-		Body[] bodys = new Body[128];
-		bodys[0] = new Body(20, 1);
-		bodys[1] = new Body();
-		double loc[] = {200.0, 200.0, 0.0};
-		double speed[] = {0.0, 0.0};
-		double loc2[] = {600.0, 672.0, 0.0};
-		double speed2[] = {-4.0, -6.0};
+		ArrayList<Body> bodys = new ArrayList<Body>();
+		Body b = new Body(20, 200.0, 200.0, 0.0, 0.0, 3400000000000.0);
+		Body b2 = new Body(20, 600.0, 672.0, -4.0, -6.0, 3);
+		Body b3 = new Body(20, 10.0, 567.0, 2.0, -2.5, 3);
+		bodys.add(b);
+		bodys.add(b2);
+		bodys.add(b3);
 		double G = 6.67 * 10e-11;
-		bodys[0].setLoc(loc);
-		bodys[0].setSpeed(speed);
-		bodys[0].setMass(4000000000000.0);
-		bodys[1].setLoc(loc2);
-		bodys[1].setSpeed(speed2);
-		bodys[1].setMass(3);
-		System.out.println("Body size: " + bodys[0].getSize());
-		System.out.println("Distance: " + bodys[0].getDistance(bodys[1]));
-		System.out.println("Bodys size: " + bodys.length);
+		System.out.println("Bodys size: " + bodys.size());
 
         BodyCanvas canvas = new BodyCanvas(bodys);
         JFrame frame = new JFrame();
@@ -32,33 +25,29 @@ public class nBodySimulator {
         frame.setVisible(true);
         canvas.setBackground(Color.black);
         for(int i = 0; i < 2000; i++) {
-        	double fx0, fy0, fx1, fy1, dist, F, ax0, ay0, ax1, ay1;
-        	double[] loc0 = bodys[0].getLoc();
-        	double[] loc1 = bodys[1].getLoc();
-        	double[] s0 = bodys[0].getSpeed();
-        	double[] s1 = bodys[1].getSpeed();
-         	dist = bodys[0].getDistance(bodys[1]);
-        	F = G * bodys[0].getMass() * bodys[1].getMass();
-        	System.out.println("F: " + F);
-        	F /= Math.pow(dist, 2);
-        	fx0 = F * ((loc1[0] - loc0[0]) / dist);
-        	fy0 = F * ((loc1[1] - loc0[1]) / dist);
-        	fx1 = F * ((loc0[0] - loc1[0]) / dist);
-        	fy1 = F * ((loc0[1] - loc1[1]) / dist);
-        	System.out.println("fx0: " + fx0);
-        	ax0 = fx0 / bodys[0].getMass();
-        	ay0 = fy0 / bodys[0].getMass();
-        	ax1 = fx1 / bodys[1].getMass();
-        	ay1 = fy1 / bodys[1].getMass();
-        	System.out.println("ax0: " + ax0);
-        	s0[0] += ax0;
-        	s0[1] += ay0;
-        	s1[0] += ax1;
-        	s1[1] += ay1;
-        	bodys[0].setSpeed(s0);
-        	bodys[1].setSpeed(s1);
-        	bodys[0].update();
-        	bodys[1].update();
+        	for(int j = 0; j < bodys.size(); j ++) {
+        		double fx = 0, fy = 0, ax = 0, ay = 0;
+        		double[] s = bodys.get(j).getSpeed();
+        		for(int k = 0; k < bodys.size(); k++) {
+        			if(j == k) continue;
+        			double dist, F;
+        			double[] locj = bodys.get(j).getLoc();
+        			double[] lock = bodys.get(k).getLoc();
+        			dist = bodys.get(j).getDistance(bodys.get(k));
+        			F = G * bodys.get(j).getMass() * bodys.get(k).getMass();
+        			F /= Math.pow(dist, 2);
+        			fx += F * ((lock[0] - locj[0]) / dist);
+        			fy += F * ((lock[1] - locj[1]) / dist);
+        		}
+        		ax = fx / bodys.get(j).getMass();
+        		ay = fy / bodys.get(j).getMass();
+        		s[0] += ax;
+            	s[1] += ay;
+            	bodys.get(j).setSpeed(s);
+        	}
+        	for(int j = 0; j < bodys.size(); j ++) {
+        		bodys.get(j).update();
+        	}
         	canvas.repaint();
         	Thread.sleep(50);
         }

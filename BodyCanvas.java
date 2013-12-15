@@ -5,18 +5,18 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 public class BodyCanvas extends Canvas {
-	Body[] bodys;
+	ArrayList<Body> bodys;
 	
     public BodyCanvas() {
     }
  
-    public BodyCanvas(Body[] bodys) {
+    public BodyCanvas(ArrayList<Body> bodys) {
     	this.bodys = bodys;
     }
     public void paint(Graphics graphics) {    	
-        for(int i = 0; i < 2; i++) {
-        	double loc[] = bodys[i].getLoc();
-        	ArrayList<double[]> hist = bodys[i].getHistory();
+        for(int i = 0; i < bodys.size(); i++) {
+        	double loc[] = bodys.get(i).getLoc();
+        	ArrayList<double[]> hist = bodys.get(i).getHistory();
         	graphics.setColor(Color.white);
         	boolean set = false;
         	double[] prev = {0.0, 0.0};
@@ -27,8 +27,8 @@ public class BodyCanvas extends Canvas {
         		prev = h;
         		set = true;
         	}
-        	graphics.setColor(bodys[i].getColor());
-        	int size = bodys[i].getSize();
+        	graphics.setColor(bodys.get(i).getColor());
+        	int size = bodys.get(i).getSize();
         	graphics.fillOval((int)(loc[0] - 0.5*size), (int)(loc[1] - 0.5*size), size, size);
         }
         
