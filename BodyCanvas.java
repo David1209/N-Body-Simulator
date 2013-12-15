@@ -3,7 +3,9 @@ package nBodySimulator;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class BodyCanvas extends Canvas {
+import javax.swing.JPanel;
+
+public class BodyCanvas extends JPanel {
 	private static final long serialVersionUID = 1L;
 	ArrayList<Body> bodys;
 	double worldsize;
@@ -17,21 +19,24 @@ public class BodyCanvas extends Canvas {
     	this.worldsize = worldsize;
     	this.windowsize = windowsize;
     }
-    public void paint(Graphics graphics) {    	
+    public void paintComponent(Graphics graphics) { 
+    	graphics.setColor(Color.black);
+    	graphics.fillRect(0,0,windowsize,windowsize);
         for(int i = 0; i < bodys.size(); i++) {
         	double loc[] = world2screen(bodys.get(i).getLoc());
         	ArrayList<double[]> hist = bodys.get(i).getHistory();
         	graphics.setColor(Color.white);
         	boolean set = false;
         	double[] prev = {0.0, 0.0};
-        	for(double[] h : hist) {
-        		double[] h1 = world2screen(h);
-        		if(set) {
-        			graphics.drawLine((int)prev[0], (int)prev[1], (int)h1[0], (int)h1[1]);
-        		}
-        		prev = h1;
-        		set = true;
-        	}
+        	
+//        	for(double[] h : hist) {
+//        		double[] h1 = world2screen(h);
+//        		if(set) {
+//        			graphics.drawLine((int)prev[0], (int)prev[1], (int)h1[0], (int)h1[1]);
+//        		}
+//        		prev = h1;
+//        		set = true;
+//        	}
         	graphics.setColor(bodys.get(i).getColor());
         	int size = bodys.get(i).getSize();
         	graphics.fillOval((int)(loc[0] - 0.5*size), (int)(loc[1] - 0.5*size), size, size);

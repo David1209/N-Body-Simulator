@@ -58,7 +58,7 @@ public class nBodySimulator {
         	for(int j = 0; j < bodys.size(); j ++) {
         		bodys.get(j).update();
         	}
-        	if(i % 10 == 0) {
+        	if(i % 8 == 0) {
         		canvas.repaint();
         		System.out.println("I: " + i);
         		Thread.sleep(10);
