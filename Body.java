@@ -41,7 +41,6 @@ public class Body {
 	
 	public double[] getLoc() {
 		double[] loc = {x, y};
-//		System.out.println("Getting location: " + x);
 		return loc;
 	}
 	
@@ -50,7 +49,6 @@ public class Body {
 		y = loc[1];
 		double[] a = {x, y};
 		hist.add(a);
-//		System.out.println("Updating location to: " + x);
 	}
 	
 	public double getDistance(Body b) {
