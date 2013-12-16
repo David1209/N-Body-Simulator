@@ -1,4 +1,8 @@
-package nBodySimulator;
+/*
+ * N-Body Simulator
+ * By David van Erkelens, 10264019
+ * December 15th, 2013
+ */
 
 import java.awt.Color;
 import java.util.ArrayList;

@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}Inleiding}{2}
+\contentsline {section}{\numberline {2}Formules}{2}
+\contentsline {section}{\numberline {3}Implementatie}{3}
+\contentsline {subsection}{\numberline {3.1}Body-object}{3}
+\contentsline {subsection}{\numberline {3.2}BodyPanel klasse}{3}
+\contentsline {subsection}{\numberline {3.3}nBodySimulator}{4}
+\contentsline {section}{\numberline {4}Experimenten}{6}
+\contentsline {subsection}{\numberline {4.1}Symmetrische planeten}{6}
+\contentsline {subsection}{\numberline {4.2}Zonnestelsel}{7}
+\contentsline {section}{\numberline {5}Beperkingen}{8}
+\contentsline {section}{\numberline {6}Conclusie}{8}
